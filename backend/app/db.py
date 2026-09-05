@@ -1,0 +1,19 @@
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
+
+from app.config import settings
+
+_client: AsyncIOMotorClient | None = None
+
+
+def get_client() -> AsyncIOMotorClient:
+    """Lazily-created Motor client. In the real SLS app, swap this out for the
+    app's existing shared Mongo client rather than opening a second
+    connection pool."""
+    global _client
+    if _client is None:
+        _client = AsyncIOMotorClient(settings.mongo_uri)
+    return _client
+
+
+def get_database() -> AsyncIOMotorDatabase:
+    return get_client()[settings.mongo_db_name]
