@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Soft Life Academy",
+    "slug": "soft-life-academy",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#FBF7F2"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.softlifesociety.academy"
+    },
+    "android": {
+      "package": "com.softlifesociety.academy"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

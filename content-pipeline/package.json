@@ -1,0 +1,13 @@
+{
+  "name": "soft-life-academy-content-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Curriculum markdown -> slide decks, PDF workbooks, canvas previews, and app seed data.",
+  "dependencies": {
+    "pptxgenjs": "^3.12.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.2.1",
+    "sharp": "^0.33.4"
+  }
+}
