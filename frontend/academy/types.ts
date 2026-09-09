@@ -22,6 +22,7 @@ export interface ModulePublic {
   order: number;
   title: string;
   lessons: LessonPublic[];
+  workbook_page_range: string | null;
 }
 
 export interface CourseDetail extends CourseSummary {
@@ -71,7 +72,17 @@ export interface CheckoutResponse {
   session_id: string;
 }
 
+export interface WorkbookSection {
+  title: string;
+  pages: string | null;
+}
+
 export interface WorkbookResponse {
   download_url: string;
   expires_at: string;
+  title: string;
+  description: string;
+  page_count: number | null;
+  file_size_mb: number | null;
+  sections: WorkbookSection[];
 }

@@ -8,25 +8,29 @@ to be **dropped into the existing Soft Life Society app**, not run standalone
 
 ```
 academy/
-  theme.ts               Design tokens (colors, fonts) — see Integration below
+  theme.ts               Design tokens (colors, fonts, derived text tones) — see Integration below
   types.ts                 TS types mirroring the backend response schemas
   api.ts                    Fetch client for the /academy/* endpoints
   components/
     CourseCard.tsx           Cream card, gold price tag / blush progress bar
     LessonListItem.tsx        Ink text on ivory, gold when completed, blush when current
     ProgressBar.tsx
-    WorkbookDownloadButton.tsx  Gold fill, ivory text
     RecommendedNextCard.tsx    Rose accent badge
   screens/
-    CourseListScreen.tsx      "My Courses" + browse published courses
+    HomeScreen.tsx            Academy dashboard: Continue card, catalog, workbook shortcut
     CourseDetailScreen.tsx    Module/lesson list, progress bar, enroll CTA
     LessonPlayerScreen.tsx    Ink background, video playback, mark-complete/auto-advance
-    CourseCompleteScreen.tsx  Cormorant Garamond headline, upsell card
+    WorkbookScreen.tsx        Cover, description, format tags, download, "Inside" contents
+    CertificateScreen.tsx     Certificate card (learner name/date), Save/Share, upsell card
   navigation/
-    AcademyNavigator.tsx      Native-stack wiring the four screens above
+    AcademyNavigator.tsx      Native-stack wiring the five screens above
 config.ts                Placeholder for the app's real API base URL
-auth/session.ts           Placeholder for the app's real getAuthToken()
+auth/session.ts           Placeholder for the app's real getAuthToken() / getCurrentUserProfile()
 ```
+
+Ported from the Academy learner-flow design canvas (5 screens: Home, Course/Lesson list, Player,
+Workbook, Certificate) — screen structure and copy follow that canvas closely, reusing the same
+brand tokens it already used.
 
 ## Integration into the main SLS app
 

@@ -54,6 +54,10 @@ class CourseModel(BaseModel):
     thumbnail_url: str = ""
     modules: list[PyObjectId] = Field(default_factory=list)
     workbook_url: str = ""
+    workbook_title: str = ""
+    workbook_description: str = ""
+    workbook_page_count: int | None = None
+    workbook_file_size_mb: float | None = None
     recommended_next_course_id: PyObjectId | None = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
@@ -67,6 +71,7 @@ class ModuleModel(BaseModel):
     order: int
     title: str
     lessons: list[PyObjectId] = Field(default_factory=list)
+    workbook_page_range: str | None = None
 
 
 class LessonModel(BaseModel):

@@ -8,6 +8,7 @@ from app.academy.schemas import (
     MyCourseSummary,
     ProgressResponse,
     WorkbookResponse,
+    WorkbookSection,
 )
 from app.academy.services import upsell
 from app.academy.services.emails import ConsoleEmailSender, send_completion_and_upsell
@@ -171,4 +172,17 @@ async def get_workbook(
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Workbook not available for this course")
 
     download_url, expires_at = generate_signed_workbook_url(course_id, course["workbook_url"])
-    return WorkbookResponse(download_url=download_url, expires_at=expires_at)
+    modules = await repo.list_modules_for_course(db, course_id)
+
+    return WorkbookResponse(
+        download_url=download_url,
+        expires_at=expires_at,
+        title=course.get("workbook_title") or f"{course['title']} Workbook",
+        description=course.get("workbook_description", ""),
+        page_count=course.get("workbook_page_count"),
+        file_size_mb=course.get("workbook_file_size_mb"),
+        sections=[
+            WorkbookSection(title=m["title"], pages=m.get("workbook_page_range"))
+            for m in modules
+        ],
+    )

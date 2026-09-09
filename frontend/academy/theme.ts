@@ -14,6 +14,20 @@ export const colors = {
   ink: "#2B2521",
 } as const;
 
+/** Derived text tones — same ink, reduced opacity, for the eyebrow labels
+ * and secondary copy used across the Home/Workbook/Certificate screens. */
+export const textTones = {
+  label: "rgba(43,37,33,0.5)",
+  secondary: "rgba(43,37,33,0.68)",
+} as const;
+
+/** A slightly lighter card surface than `cream`, used for catalog rows and
+ * the "up next" style cards so they read as a step below the primary card. */
+export const surfaces = {
+  raised: "#FFFCF8",
+  hairline: "rgba(43,37,33,0.09)",
+} as const;
+
 export const fonts = {
   display: "CormorantGaramond_600SemiBold",
   displayRegular: "CormorantGaramond_400Regular",

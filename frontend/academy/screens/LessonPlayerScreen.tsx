@@ -33,7 +33,7 @@ export function LessonPlayerScreen() {
     try {
       const result = await academyApi.completeLesson(lessonId);
       if (result.course_completed) {
-        navigation.replace("CourseComplete", {
+        navigation.replace("Certificate", {
           courseId,
           recommendedNextCourseId: result.recommended_next_course_id,
         });
@@ -71,13 +71,25 @@ export function LessonPlayerScreen() {
 
       <Text style={styles.lessonTitle}>{lesson.title}</Text>
 
-      <Pressable style={styles.completeButton} onPress={handleComplete} disabled={completing}>
-        {completing ? (
-          <ActivityIndicator color={colors.ink} />
-        ) : (
-          <Text style={styles.completeLabel}>Mark Complete & Continue</Text>
-        )}
-      </Pressable>
+      <View style={styles.actionsRow}>
+        <Pressable
+          style={styles.completeButton}
+          onPress={handleComplete}
+          disabled={completing}
+        >
+          {completing ? (
+            <ActivityIndicator color={colors.ink} />
+          ) : (
+            <Text style={styles.completeLabel}>Mark Complete & Continue</Text>
+          )}
+        </Pressable>
+        <Pressable
+          style={styles.workbookIconButton}
+          onPress={() => navigation.navigate("Workbook", { courseId })}
+        >
+          <Text style={styles.workbookIconLabel}>↓</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -104,16 +116,33 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.lg,
     marginTop: spacing.md,
   },
+  actionsRow: {
+    flexDirection: "row",
+    gap: spacing.sm,
+    margin: spacing.lg,
+  },
   completeButton: {
+    flex: 1,
     backgroundColor: colors.ivory,
     borderRadius: radii.pill,
     paddingVertical: spacing.md,
     alignItems: "center",
-    margin: spacing.lg,
   },
   completeLabel: {
     fontFamily: fonts.bodyBold,
     color: colors.ink,
     fontSize: 16,
+  },
+  workbookIconButton: {
+    width: 52,
+    borderRadius: radii.pill,
+    borderWidth: 1,
+    borderColor: "rgba(251,247,242,0.28)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  workbookIconLabel: {
+    fontSize: 17,
+    color: colors.blush,
   },
 });

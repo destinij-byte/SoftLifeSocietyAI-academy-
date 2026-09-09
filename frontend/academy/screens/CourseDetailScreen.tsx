@@ -7,7 +7,6 @@ import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from
 import { academyApi } from "../api";
 import { LessonListItem } from "../components/LessonListItem";
 import { ProgressBar } from "../components/ProgressBar";
-import { WorkbookDownloadButton } from "../components/WorkbookDownloadButton";
 import type { AcademyStackParamList } from "../navigation/AcademyNavigator";
 import { colors, fonts, radii, spacing } from "../theme";
 import type { CourseDetail, ProgressResponse } from "../types";
@@ -109,7 +108,12 @@ export function CourseDetailScreen() {
 
       {enrolled ? (
         <View style={styles.workbookBlock}>
-          <WorkbookDownloadButton courseId={course.id} />
+          <Pressable
+            style={styles.workbookButton}
+            onPress={() => navigation.navigate("Workbook", { courseId: course.id })}
+          >
+            <Text style={styles.workbookButtonLabel}>Download the Workbook</Text>
+          </Pressable>
         </View>
       ) : null}
     </ScrollView>
@@ -172,7 +176,17 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   workbookBlock: {
-    alignItems: "flex-start",
     marginBottom: spacing.xl,
+  },
+  workbookButton: {
+    backgroundColor: colors.gold,
+    borderRadius: radii.pill,
+    paddingVertical: spacing.md,
+    alignItems: "center",
+  },
+  workbookButtonLabel: {
+    fontFamily: fonts.bodyMedium,
+    color: colors.ivory,
+    fontSize: 14,
   },
 });

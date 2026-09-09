@@ -41,6 +41,7 @@ async def get_course_detail(slug: str, db: AsyncIOMotorDatabase = Depends(get_da
                 id=str(module["_id"]),
                 order=module["order"],
                 title=module["title"],
+                workbook_page_range=module.get("workbook_page_range"),
                 lessons=[
                     LessonPublic(
                         id=str(lesson["_id"]),

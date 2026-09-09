@@ -30,6 +30,7 @@ class ModulePublic(BaseModel):
     order: int
     title: str
     lessons: list[LessonPublic]
+    workbook_page_range: str | None = None
 
 
 class CourseDetail(CourseSummary):
@@ -87,9 +88,19 @@ class LessonCompleteResponse(BaseModel):
     recommended_next_course_id: str | None = None
 
 
+class WorkbookSection(BaseModel):
+    title: str
+    pages: str | None = None
+
+
 class WorkbookResponse(BaseModel):
     download_url: str
     expires_at: datetime
+    title: str
+    description: str
+    page_count: int | None = None
+    file_size_mb: float | None = None
+    sections: list[WorkbookSection]
 
 
 # ---- Admin CRUD ----
@@ -104,6 +115,10 @@ class CourseCreate(BaseModel):
     status: CourseStatus = CourseStatus.draft
     thumbnail_url: str = ""
     workbook_url: str = ""
+    workbook_title: str = ""
+    workbook_description: str = ""
+    workbook_page_count: int | None = None
+    workbook_file_size_mb: float | None = None
     recommended_next_course_id: str | None = None
 
 
@@ -115,6 +130,10 @@ class CourseUpdate(BaseModel):
     status: CourseStatus | None = None
     thumbnail_url: str | None = None
     workbook_url: str | None = None
+    workbook_title: str | None = None
+    workbook_description: str | None = None
+    workbook_page_count: int | None = None
+    workbook_file_size_mb: float | None = None
     recommended_next_course_id: str | None = None
 
 
@@ -122,6 +141,7 @@ class ModuleCreate(BaseModel):
     course_id: str
     order: int
     title: str
+    workbook_page_range: str | None = None
 
 
 class LessonCreate(BaseModel):

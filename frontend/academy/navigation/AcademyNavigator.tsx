@@ -1,17 +1,19 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 
-import { CourseCompleteScreen } from "../screens/CourseCompleteScreen";
+import { CertificateScreen } from "../screens/CertificateScreen";
 import { CourseDetailScreen } from "../screens/CourseDetailScreen";
-import { CourseListScreen } from "../screens/CourseListScreen";
+import { HomeScreen } from "../screens/HomeScreen";
 import { LessonPlayerScreen } from "../screens/LessonPlayerScreen";
+import { WorkbookScreen } from "../screens/WorkbookScreen";
 import { colors, fonts } from "../theme";
 
 export type AcademyStackParamList = {
-  CourseList: undefined;
+  Home: undefined;
   CourseDetail: { slug: string };
   LessonPlayer: { lessonId: string; courseId: string };
-  CourseComplete: { courseId: string; recommendedNextCourseId: string | null };
+  Workbook: { courseId: string };
+  Certificate: { courseId: string; recommendedNextCourseId: string | null };
 };
 
 const Stack = createNativeStackNavigator<AcademyStackParamList>();
@@ -30,21 +32,18 @@ export function AcademyNavigator() {
         contentStyle: { backgroundColor: colors.ivory },
       }}
     >
-      <Stack.Screen name="CourseList" component={CourseListScreen} options={{ title: "Academy" }} />
-      <Stack.Screen
-        name="CourseDetail"
-        component={CourseDetailScreen}
-        options={{ title: "" }}
-      />
+      <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="CourseDetail" component={CourseDetailScreen} options={{ title: "" }} />
       <Stack.Screen
         name="LessonPlayer"
         component={LessonPlayerScreen}
         options={{ title: "", headerStyle: { backgroundColor: colors.ink } }}
       />
+      <Stack.Screen name="Workbook" component={WorkbookScreen} options={{ headerShown: false }} />
       <Stack.Screen
-        name="CourseComplete"
-        component={CourseCompleteScreen}
-        options={{ title: "Course Complete", headerBackVisible: false }}
+        name="Certificate"
+        component={CertificateScreen}
+        options={{ title: "", headerBackVisible: false }}
       />
     </Stack.Navigator>
   );
