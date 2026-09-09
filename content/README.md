@@ -22,6 +22,9 @@ artifact.
   course exists in the `courses` collection.
 - `workbook-print.pdf` — same 10-page layout with static ruled
   lines/checkboxes for handwriting, no form fields.
+- `design-canvas/` — the source Claude Design canvas the app's learner-flow
+  screens (`frontend/academy/screens/`) were ported from. See its own
+  README for what's in it — it's a design reference, not runnable code.
 
 ## Regenerating or extending
 

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #F1EAE2; }
+  a { color: #C9A15E; text-decoration: none; }
+  a:hover { color: #B08C4C; }
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; padding: 44px 24px 72px; display: flex; flex-direction: column; align-items: center; gap: 30px; font-family: 'DM Sans', system-ui, sans-serif; color: #2B2521;">
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 9px; text-align: center;">
+    <div style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #A2917F;">Soft Life Society</div>
+    <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 44px; line-height: 1;">Academy</div>
+    <div style="font-size: 13px; color: #7A6A5C; max-width: 440px; line-height: 1.5;">Tap through the enrolled-learner flow: home &rarr; lessons &rarr; player &rarr; workbook &rarr; certificate.</div>
+  </div>
+
+  <sc-if value="{{ showProto }}" hint-placeholder-val="{{ true }}">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 18px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 7px; justify-content: center;">
+      <sc-for list="{{ nav }}" as="t" hint-placeholder-count="5">
+        <div onClick="{{ t.go }}" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 14px; border-radius: 999px; cursor: pointer; border: 1px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.color }};">{{ t.label }}</div>
+      </sc-for>
+    </div>
+    <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" dark="{{ isPlayer }}" hint-size="402px,874px">
+      <dc-import name="AcademyScreen" vm="{{ vm }}" hint-size="402px,874px"></dc-import>
+    </x-import>
+    <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #A2917F;">{{ hintLabel }}</div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ showSheet }}" hint-placeholder-val="{{ true }}">
+  <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; align-items: center; padding-top: 14px; border-top: 1px solid rgba(43,37,33,0.1);">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;">
+      <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 28px; line-height: 1;">Handoff sheet</div>
+      <div style="font-size: 12px; color: #8A7A6C;">Five screens at 402 &times; 874, no chrome.</div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 26px; justify-content: center;">
+      <sc-for list="{{ sheet }}" as="s" hint-placeholder-count="5">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span style="font-family: ui-monospace, Menlo, monospace; font-size: 10px; color: #C9A15E;">{{ s.num }}</span>
+            <span style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #7A6A5C;">{{ s.label }}</span>
+          </div>
+          <div style="width: 402px; height: 874px; overflow: hidden; border-radius: 20px; border: 1px solid rgba(43,37,33,0.1); box-shadow: 0 18px 40px rgba(43,37,33,0.08);">
+            <dc-import name="AcademyScreen" vm="{{ s.vm }}" hint-size="402px,874px"></dc-import>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Prototype&quot;,&quot;Handoff sheet&quot;,&quot;Both&quot;],&quot;default&quot;:&quot;Both&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;learnerName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Jasmine Carter&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;completedLessons&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:5,&quot;min&quot;:0,&quot;max&quot;:16,&quot;unit&quot;:&quot;lessons&quot;,&quot;tsType&quot;:&quot;number&quot;}}">
+const COURSE = [
+  ["The Idea Layer", [["Turning a Skill Into a Sellable Product", "10 min"], ["Finding the Woman You're Building For", "8 min"], ["Naming and Positioning Your Offer", "12 min"]]],
+  ["Your Digital Product", [["Choosing the Right Format", "9 min"], ["Outlining It in One Sitting", "14 min"], ["Building It in Canva and Notion", "18 min"]]],
+  ["The Home You Own", [["Setting Up a Site That Sells", "16 min"], ["Writing a Sales Page in Your Voice", "13 min"]]],
+  ["Getting Paid", [["Pricing Without Apologising", "11 min"], ["Checkout, Delivery and Receipts", "15 min"]]],
+  ["Content That Sells Softly", [["The Three-Post Rhythm", "10 min"], ["Batching a Month in a Day", "12 min"]]],
+  ["The Quiet Launch", [["Your Seven-Day Launch Plan", "17 min"], ["Warming Your List Before You Ask", "9 min"]]],
+  ["Soft Systems", [["Automating Delivery and Emails", "14 min"], ["Reading Your Numbers Once a Month", "8 min"]]],
+];
+
+const BLURBS = {
+  "m2l3": "Open Canva and Notion beside me. We build the actual deliverable — cover, contents, worksheets — in one sitting, then export it the way buyers expect to receive it.",
+};
+
+const CATALOG = [
+  { title: "The Soft Life Financial Reset", tagline: "Budget, debt, savings, goals", price: "$149" },
+  { title: "AI for the Modern Woman", tagline: "Planning, content, admin", price: "$129" },
+  { title: "Personal Brand Glow-Up", tagline: "Presence, strategy, monetisation", price: "$149" },
+];
+
+const WORKBOOK = [
+  { num: "01", title: "Idea audit and skill inventory", pages: "p. 3" },
+  { num: "02", title: "Your buyer, in her own words", pages: "p. 9" },
+  { num: "03", title: "Offer outline template", pages: "p. 16" },
+  { num: "04", title: "Pricing and margin tables", pages: "p. 24" },
+  { num: "05", title: "Seven-day launch calendar", pages: "p. 31" },
+  { num: "06", title: "Monthly numbers review", pages: "p. 38" },
+];
+
+class Component extends DCLogic {
+  state = { screen: "home", overrideDone: null };
+
+  flat() {
+    const out = [];
+    COURSE.forEach((m, mi) => m[1].forEach((l, li) => out.push({
+      id: "m" + (mi + 1) + "l" + (li + 1),
+      title: l[0], dur: l[1],
+      moduleLabel: "Module " + (mi + 1) + " · " + m[0],
+      mi: mi + 1, li: li + 1,
+    })));
+    return out;
+  }
+
+  doneCount() {
+    const n = this.state.overrideDone !== null ? this.state.overrideDone
+      : (this.props.completedLessons ?? 5);
+    return Math.max(0, Math.min(this.flat().length, n));
+  }
+
+  buildVm(screen, opts) {
+    const o = opts || {};
+    const lessons = this.flat();
+    const total = lessons.length;
+    const done = o.done !== undefined ? o.done : this.doneCount();
+    const pct = Math.round((done / total) * 100);
+    const currentIndex = Math.min(done, total - 1);
+    const cur = lessons[currentIndex];
+    const next = lessons[Math.min(currentIndex + 1, total - 1)];
+    const name = this.props.learnerName ?? "Jasmine Carter";
+    const first = String(name).split(" ")[0];
+    const go = (s) => () => this.setState({ screen: s });
+
+    const modules = COURSE.map((m, mi) => ({
+      num: String(mi + 1).padStart(2, "0"),
+      title: m[0],
+      lessons: m[1].map((l, li) => {
+        const idx = lessons.findIndex(x => x.mi === mi + 1 && x.li === li + 1);
+        const isDone = idx < done;
+        const isCurrent = idx === currentIndex;
+        return {
+          title: l[0],
+          meta: isDone ? "Completed · " + l[1] : (isCurrent ? "Continue · " + l[1] : l[1]),
+          dot: isDone ? "✓" : String(li + 1),
+          rowBg: isCurrent ? "#F7DEDE" : (isDone ? "#F7F1E9" : "transparent"),
+          dotBg: isDone ? "#C9A15E" : (isCurrent ? "#FBF7F2" : "transparent"),
+          dotColor: isDone ? "#FBF7F2" : "#8A7A6C",
+          dotBorder: isDone ? "#C9A15E" : "rgba(43,37,33,0.16)",
+          titleColor: isDone ? "#8A7A6C" : "#2B2521",
+          go: () => this.setState({ screen: "player", overrideDone: idx }),
+        };
+      }),
+    }));
+
+    const isLast = done >= total - 1;
+    return {
+      screen,
+      isHome: screen === "home", isCourse: screen === "course", isPlayer: screen === "player",
+      isWorkbook: screen === "workbook", isDone: screen === "done",
+      greeting: "Good morning, " + first,
+      learnerName: name,
+      pctCss: pct + "%", pctLabel: pct + "%",
+      doneCount: done, totalLessons: total,
+      currentTitle: cur.title, currentModuleLabel: "Module " + cur.mi,
+      catalog: CATALOG,
+      modules,
+      workbookSections: WORKBOOK,
+      nextCourse: { title: "From Idea to Income", blurb: "Concept to paid offer in 30 days", price: "$149" },
+      lesson: {
+        title: cur.title,
+        moduleLabel: cur.moduleLabel,
+        counter: "Lesson " + (currentIndex + 1) + "/" + total,
+        dur: cur.dur.replace(" min", ":00"),
+        at: "0:00",
+        playedCss: "18%",
+        blurb: BLURBS[cur.id] || "Watch this through once, then open the workbook page for this lesson and fill it in while it is fresh.",
+        cta: isLast ? "Mark complete and finish" : "Mark complete and continue",
+        nextTitle: next.title,
+        nextMeta: "Module " + next.mi + " · " + next.dur,
+      },
+      onHome: go("home"), onOpenCourse: go("course"), onWorkbook: go("workbook"), onDone: go("done"),
+      onOpenPlayer: go("player"),
+      onComplete: () => {
+        const d = Math.min(total, done + 1);
+        this.setState({ overrideDone: d, screen: d >= total ? "done" : "player" });
+      },
+    };
+  }
+
+  renderVals() {
+    const mode = this.props.mode ?? "Both";
+    const screen = this.state.screen;
+    const tabs = [["home", "Home"], ["course", "Lessons"], ["player", "Player"], ["workbook", "Workbook"], ["done", "Certificate"]];
+    const total = this.flat().length;
+    return {
+      showProto: mode !== "Handoff sheet",
+      showSheet: mode !== "Prototype",
+      isPlayer: screen === "player",
+      hintLabel: screen === "player" ? "Mark complete advances the lesson" : "Tap the cards and rows",
+      nav: tabs.map(([k, label]) => ({
+        label,
+        go: () => this.setState({ screen: k }),
+        bg: screen === k ? "#2B2521" : "#FBF7F2",
+        color: screen === k ? "#FBF7F2" : "#7A6A5C",
+        border: screen === k ? "#2B2521" : "rgba(43,37,33,0.14)",
+      })),
+      vm: this.buildVm(screen),
+      sheet: [
+        { num: "01", label: "Academy home", vm: this.buildVm("home", { done: 5 }) },
+        { num: "02", label: "Lessons and progress", vm: this.buildVm("course", { done: 5 }) },
+        { num: "03", label: "Player", vm: this.buildVm("player", { done: 5 }) },
+        { num: "04", label: "Workbook", vm: this.buildVm("workbook", { done: 5 }) },
+        { num: "05", label: "Certificate", vm: this.buildVm("done", { done: total }) },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>
