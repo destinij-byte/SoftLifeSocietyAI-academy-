@@ -1,0 +1,58 @@
+.page-centered--dark {
+  background: var(--ink);
+  color: rgba(251, 247, 242, 0.7);
+  min-height: 100vh;
+}
+
+.lesson-player-page {
+  min-height: 100vh;
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.lesson-player-page__video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #100e0c;
+}
+
+.lesson-player-page__title {
+  font-family: var(--font-body);
+  color: var(--ivory);
+  font-size: 18px;
+  margin: var(--space-md) var(--space-lg) 0;
+}
+
+.lesson-player-page__actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin: var(--space-lg);
+  margin-top: auto;
+}
+
+.lesson-player-page__complete-button {
+  flex: 1;
+  background: var(--ivory);
+  border-radius: var(--radius-pill);
+  padding: var(--space-md);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.lesson-player-page__complete-button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.lesson-player-page__workbook-button {
+  width: 52px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(251, 247, 242, 0.28);
+  color: var(--blush);
+  font-size: 18px;
+}

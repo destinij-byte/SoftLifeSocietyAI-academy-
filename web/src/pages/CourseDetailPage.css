@@ -1,0 +1,74 @@
+.course-detail-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-md) var(--space-xl);
+}
+
+.course-detail-page__title {
+  font-size: 32px;
+  color: var(--ink);
+  margin: 0;
+}
+
+.course-detail-page__description {
+  font-size: 15px;
+  color: var(--ink-secondary);
+  margin: var(--space-xs) 0 var(--space-md);
+  line-height: 1.5;
+}
+
+.course-detail-page__progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+}
+
+.course-detail-page__progress-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.enroll-button {
+  width: 100%;
+  background: var(--gold);
+  border-radius: var(--radius-pill);
+  padding: var(--space-md);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ivory);
+  margin-bottom: var(--space-lg);
+}
+
+.enroll-button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.module-block {
+  margin-bottom: var(--space-lg);
+}
+
+.module-block__title {
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0 0 var(--space-sm);
+}
+
+.course-detail-page__workbook {
+  margin-bottom: var(--space-xl);
+}
+
+.workbook-button {
+  width: 100%;
+  background: var(--gold);
+  border-radius: var(--radius-pill);
+  padding: var(--space-md);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ivory);
+}

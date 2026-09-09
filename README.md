@@ -7,7 +7,7 @@ nudge, completion, upsell). It's built to reuse the existing SLS user
 accounts, auth, and subscription infrastructure — there's no separate login
 system.
 
-This repo contains the Academy module on its own (backend + frontend),
+This repo contains the Academy module on its own (backend + two frontends),
 meant to be merged into the main Soft Life Society app rather than deployed
 as a standalone service.
 
@@ -16,10 +16,14 @@ as a standalone service.
 - [`backend/`](backend/README.md) — FastAPI routes, MongoDB models, Stripe
   checkout/webhook, email triggers, progress tracking. See its README for
   the full endpoint list and integration steps.
-- [`frontend/`](frontend/README.md) — Expo/React Native screens and
-  components for the Academy tab (course list, lesson player, progress,
-  completion/upsell), styled to match the existing SLS brand palette and
-  typography.
+- [`web/`](web/README.md) — the Academy **website** (React + Vite): Home,
+  Course Detail, Lesson Player, Workbook, and Certificate pages, calling the
+  same backend API.
+- [`frontend/`](frontend/README.md) — the Academy **mobile app** (Expo/React
+  Native): the same five screens, built for iOS/Android instead of the web.
+
+Both frontends implement the same learner flow and brand tokens against the
+same backend — pick whichever surface (or both) the main SLS app needs.
 
 ## Build order
 
